@@ -9,16 +9,13 @@ class Scooter{
     this.isBroken = false
   }
   rent() {
-    if(this.charge > 20 && !this.isBroken) {
-      this.station = null;
-      this.user = "User";
-      console.log("Scooter rented")
-    } else if (this.charge <= 20) {
-      console.log("Scooter needs to charge");
-    } else if (this.isBroken === true) {
-      console.log("scooter needs repair")
+    if (this.isBroken) {
+      throw new Error("Scooter needs repair");
     }
-  }
+    if (this.charge < 20) {
+      throw new Error("Scooter needs charging");
+    }
+}
 }
 
 
