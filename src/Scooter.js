@@ -22,8 +22,42 @@ class Scooter{
     this.station = null;
     this.user = "User";
     console.log("Scooter rented")
+  }
+
+  dock(station) {
+    this.user = null;
+    this.station = station;
+    console.log("Scooter docked")
+  }
+
+  recharge() {
+  return new Promise((resolve, reject) => {
+    let intervalId = setInterval(() => {
+      if (this.charge >= 100) {
+        clearInterval(intervalId);
+        resolve();
+      } else {
+        this.charge += 10;
+        console.log(`Scooter charging: ${this.charge}%`);
+      }
+    }, 1000);
+  });
 }
+
+  
+  requestRepair() {
+    setInterval(() => {
+      console.log("Repair completed");
+      clearInterval();
+      this.isBroken = false;
+    }, 5000);
+  }
 }
+
+
+
+
 
 
 module.exports = Scooter
+
