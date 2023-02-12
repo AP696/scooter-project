@@ -4,7 +4,6 @@ class User {
     this.password = password;
     this.age = age;
     this.loggedIn = loggedIn;
-
   }
 
 }
