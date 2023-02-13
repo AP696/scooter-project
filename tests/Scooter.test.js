@@ -46,7 +46,7 @@ describe('scooter class', () => {
     test("should rent scooter if charge is above 20 and not broken", () => {
       scooter1.rent()
       expect(scooter1.station).toBe(null);
-      expect(scooter1.user).toBe("User");
+      expect(scooter1.user).toBe("user");
     });
 
     test("should not rent scooter when charge is below 20", () => {

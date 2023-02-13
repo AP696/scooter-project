@@ -20,7 +20,7 @@ class Scooter{
       throw new Error("Scooter needs charging");
     }
     this.station = null;
-    this.user = "User";
+    this.user = "user";
     console.log("Scooter rented")
   }
 

@@ -1,15 +1,36 @@
 const Scooter = require('../src/Scooter')
 const User = require('../src/User')
-const ScooterApp = require('../src/ScooterApp')
+const ScooterApp = require('../src/ScooterApp');
+const { useRef } = require('react');
 
-// ScooterApp tests here
 
-// register user
+describe("ScooterApp", () => {
+    let scooterApp = new ScooterApp();
+    describe("registerUser", () => {
+        test("should register a user successfully", () => {
+            const user = scooterApp.registerUser("test-username", "test-password", 21);
+            expect(user).toEqual({
+                username: "test-username",
+                password: "test-password",
+                age: 21,
+            })
+            expect(scooterApp.registeredUsers).toEqual({
+                test_username: {
+                    username: "test-username",
+                    password: "test-password",
+                    age: 21,
+                }
+            })
+        });
 
-// log in
+        test("should not register a user if username is already taken", () => {
+            
+        })
 
-// log out
-
-// rent scooter
-
-// dock scooter
+        test("should not register a user if they are under 18 years old", () => {
+            const user = scooterApp.registerUser("test-username", "test-password", 17);
+            expect(user).toBeUndefined();
+            expect(scooterApp.user).toEqual({})
+        })
+    })
+})
