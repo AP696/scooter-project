@@ -28,12 +28,3 @@ describe('user', () => {
     });
 })
 
-// test username
-
-// test password
-
-// test age
-
-// test login
-
-// test logout

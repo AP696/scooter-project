@@ -52,13 +52,42 @@ describe("ScooterApp", () => {
         })
 
         test("should not log in a registered user with the incorrect password", () => {
-            scooterApp.loginUser("test_username", "incorrect_password");
-            expect(scooterApp.registeredUsers.test_username.loggedIn).toEqual(false);
+            scooterApp.registerUser("test_username", "test_password", 21);
+            const result = scooterApp.loginUser("test_username", "test_passwor");
+            expect(result).toBe(false);
+            expect(scooterApp.registeredUsers.test_username.loggedIn).toBe(false);
         });
 
         test("it should not log in an unregistered user", () => {
             scooterApp.loginUser('unregistered_username', "test_password");
             expect(scooterApp.registeredUsers['unregistered_username']).toBeUndefined();
+        })
+    })
+
+    describe("logoutUser", () => {
+        test('should log out a user', () => {
+            scooterApp.registerUser('test_username', 'test-password', 21);
+            scooterApp.loginUser('test_username', 'test-password');
+            scooterApp.logoutUser("test_username");
+            expect(scooterApp.registeredUsers.test_username.loggedIn).toBe(false);
+        });
+
+        test('should throw an error if user is not logged in', () => {
+            scooterApp.registerUser('test_username', 'test_password', 21);
+            scooterApp.loginUser('test_username', 'test_password');
+            scooterApp.logoutUser("test_username");
+            expect(() => {
+                scooterApp.logoutUser('tes_username');
+            }).toThrow(new Error('No such user is logged in'));
+        })
+    })
+
+    describe('createScooter', () => {
+        test('should create a scooter and add it to a station', () => {
+            const scooter = scooterApp.createScooter('station1');
+            expect(scooter).toBeInstanceOf(Scooter);
+            expect(scooterApp.stations.station1).toContain(scooter);
+
         })
     })
 })
